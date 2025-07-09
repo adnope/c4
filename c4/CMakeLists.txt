@@ -1,8 +1,8 @@
-add_executable(c4)
-target_sources(c4 PRIVATE main.cpp)
+add_executable(c4 main.cpp)
 
 target_link_libraries(c4
     external
+    c4_core
 )
 
 if (WIN32)

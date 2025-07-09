@@ -25,6 +25,8 @@ class Solver {
 
   std::vector<std::vector<int> > Analyze(const Position &P);
 
+  std::array<int, Position::WIDTH> ScoreColumns(const Position &P);
+
   static int RandomMove();
 
   void LoadOpeningBook(const std::string &OPENING_BOOK_PATH) const {

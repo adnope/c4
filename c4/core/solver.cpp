@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "move_sorter.hpp"
+#include "position.hpp"
 
 /**
  * Recursively score connect 4 position using negamax & alpha-beta algorithm.
@@ -202,6 +203,26 @@ std::vector<std::vector<int>> Solver::Analyze(const Position &P) {
   }
 
   return ranked_moves;
+}
+
+std::array<int, Position::WIDTH> Solver::ScoreColumns(const Position &P) {
+  std::array<int, Position::WIDTH> score_list{};
+
+  for (int col = 0; col < Position::WIDTH; ++col) {
+    if (P.CanPlay(col)) {
+      if (P.IsWinningMove(col)) {
+        score_list.at(col) = (Position::WIDTH * Position::HEIGHT + 1 - P.NumMoves()) / 2;
+        continue;
+      }
+      Position P2(P);
+      P2.PlayCol(col);
+      const int score = -Solve(P2);
+
+      score_list.at(col) = score;
+    }
+  }
+
+  return score_list;
 }
 
 int Solver::RandomMove() {

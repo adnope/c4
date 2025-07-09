@@ -7,6 +7,7 @@
 #include <unordered_set>
 #include <vector>
 
+namespace cli {
 Game::Game(const std::string &ob_book, const std::string &wb_book) {
   solver.GetReady(ob_book, wb_book);
 }
@@ -220,3 +221,4 @@ void Game::StartTraining() {
     sequence += std::to_string(move + 1);
   }
 }
+}  // namespace cli

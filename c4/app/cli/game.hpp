@@ -4,6 +4,7 @@
 
 #include "core/solver.hpp"
 
+namespace cli {
 class Game {
  public:
   explicit Game(const std::string &ob_book, const std::string &wb_book);
@@ -19,3 +20,4 @@ class Game {
 
   static void printConnectFourBoard(const std::string &sequence);
 };
+}  // namespace cli

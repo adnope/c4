@@ -1,1 +1,1 @@
-target_sources(c4 PRIVATE argparser.cpp game.cpp move_finder.cpp)
+target_sources(c4 PRIVATE app.cpp game.cpp board_analyzer.cpp)
