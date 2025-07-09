@@ -1,0 +1,1 @@
+target_sources(c4 PRIVATE argparser.cpp game.cpp move_finder.cpp)

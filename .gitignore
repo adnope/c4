@@ -1,0 +1,7 @@
+.cache/
+.idea/
+.vscode/
+build/
+
+*.exe
+*.scores
