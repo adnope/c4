@@ -1,5 +1,5 @@
-add_library(vendor INTERFACE)
+add_library(external INTERFACE)
 
-target_include_directories(vendor INTERFACE
+target_include_directories(external INTERFACE
   ${CMAKE_CURRENT_SOURCE_DIR}/include
 )

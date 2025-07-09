@@ -3,18 +3,19 @@
 #include "cxxopts/cxxopts.hpp"
 
 class ArgParser {
-public:
-  explicit ArgParser(int argc, const char** argv);
+ public:
+  explicit ArgParser(int argc, const char **argv);
 
   void Run();
-private:
+
+ private:
   cxxopts::Options options;
   int argc;
-  const char** argv;
+  const char **argv;
 
   cxxopts::ParseResult Parse();
 
-  void HandleArgs(const cxxopts::ParseResult& result);
+  void HandleArgs(const cxxopts::ParseResult &result);
 
   void Log();
 };

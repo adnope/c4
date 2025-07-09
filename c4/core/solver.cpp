@@ -44,7 +44,7 @@ int Solver::Negamax(const Position &P, int alpha, int beta) {
   const int min =
       -((Position::WIDTH * Position::HEIGHT) - 2 - P.NumMoves()) / 2;
   if (alpha < min) {
-    alpha = min; // no need to explore nodes whose values smaller than min
+    alpha = min;  // no need to explore nodes whose values smaller than min
     if (alpha >= beta) {
       return alpha;
     }
@@ -61,7 +61,7 @@ int Solver::Negamax(const Position &P, int alpha, int beta) {
   }
 
   if (beta > max) {
-    beta = max; // no need to explore nodes whose values greater than max
+    beta = max;  // no need to explore nodes whose values greater than max
     if (alpha >= beta) {
       return beta;
     }
@@ -70,7 +70,7 @@ int Solver::Negamax(const Position &P, int alpha, int beta) {
 
   MoveSorter moves;
   for (int i = Position::WIDTH; i-- != 0;) {
-    if (const uint64_t move = next & Position::ColumnMask(columnOrder[i])) {
+    if (const uint64_t move = next & Position::ColumnMask(columnOrder.at(i))) {
       moves.Add(move, P.MoveScore(move));
     }
   }
@@ -81,9 +81,9 @@ int Solver::Negamax(const Position &P, int alpha, int beta) {
     const int score = -Negamax(P2, -beta, -alpha);
 
     if (score >= beta) {
-      return score; // prune the exploration
+      return score;  // prune the exploration
     }
-    alpha = std::max(score, alpha); // reduce the [alpha;beta] window
+    alpha = std::max(score, alpha);  // reduce the [alpha;beta] window
   }
 
   // save the upper bound of the position, minus MIN_SCORE and +1 to make
@@ -155,7 +155,8 @@ int Solver::FindBestMove(const Position &P) {
 
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_int_distribution<> dist(0, static_cast<int>(best_cols.size() - 1));
+  std::uniform_int_distribution<> dist(0,
+                                       static_cast<int>(best_cols.size() - 1));
   return best_cols[dist(gen)];
 }
 
@@ -223,7 +224,8 @@ void Solver::GetReady(const std::string &OPENING_BOOK_PATH,
   Warmup(WARMUP_BOOK_PATH);
   const auto warmup_end = hr_clock::now();
   const std::chrono::duration<double> warmup_taken = warmup_end - warmup_start;
-  const size_t warmup_num_moves = transTable.GetOpeningTableSize() - open_num_moves;
+  const size_t warmup_num_moves =
+      transTable.GetOpeningTableSize() - open_num_moves;
 
   std::cout << "Opening book: loaded " << open_num_moves << " moves in "
             << open_taken.count() << " seconds.\n";

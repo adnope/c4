@@ -1,11 +1,11 @@
 #include "argparser.hpp"
 
+#include <iostream>
+#include <string>
+
 #include "cxxopts/cxxopts.hpp"
 #include "game.hpp"
 #include "move_finder.hpp"
-
-#include <iostream>
-#include <string>
 
 ArgParser::ArgParser(const int argc, const char **argv)
     : options("c4", "A Connect Four game solver"), argc(argc), argv(argv) {
@@ -49,6 +49,7 @@ cxxopts::ParseResult ArgParser::Parse() {
     result = options.parse(argc, argv);
   } catch (cxxopts::exceptions::parsing &e) {
     std::cout << e.what() << '\n' << options.help();
+    return result;
   }
   if (result.contains("help")) {
     std::cout << options.help();

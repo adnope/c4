@@ -11,14 +11,14 @@
  * the best score. The getNext() function is used to get the best move.
  */
 class MoveSorter {
-public:
+ public:
   void Add(uint64_t move, int score);
 
   uint64_t GetNext();
 
   void Reset() { size = 0; }
 
-private:
+ private:
   unsigned int size = 0;
 
   struct Entry {

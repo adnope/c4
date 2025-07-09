@@ -49,7 +49,7 @@ unsigned int Position::Play(const std::string &seq) {
     const int col = seq[i] - '1';
     if (col < 0 || col >= Position::WIDTH || !CanPlay(col) ||
         IsWinningMove(col)) {
-      return i; // invalid move
+      return i;  // invalid move
     }
     PlayCol(col);
   }
@@ -64,7 +64,7 @@ uint64_t Position::PossibleNonLosingMoves() const {
   if (forced_moves != 0) {
     if ((forced_moves & (forced_moves - 1)) != 0) {
       // check if there is more than one forced move
-      return 0; // the opponent has two winning moves and you cannot stop him
+      return 0;  // the opponent has two winning moves and you cannot stop him
     }
     possible_mask = forced_moves;
     // enforce to play the single forced move
@@ -76,12 +76,12 @@ uint64_t Position::PossibleNonLosingMoves() const {
 uint64_t Position::Key3() const {
   uint64_t key_forward = 0;
   for (int i = 0; i < Position::WIDTH; i++) {
-    PartialKey3(key_forward, i); // compute key in increasing order of columns
+    PartialKey3(key_forward, i);  // compute key in increasing order of columns
   }
 
   uint64_t key_reverse = 0;
   for (int i = Position::WIDTH; i-- != 0;) {
-    PartialKey3(key_reverse, i); // compute key in decreasing order of columns
+    PartialKey3(key_reverse, i);  // compute key in decreasing order of columns
   }
 
   return key_forward < key_reverse ? key_forward / 3 : key_reverse / 3;

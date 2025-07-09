@@ -31,13 +31,14 @@ constexpr static uint64_t Bottom(const int width, const int height) {
 // 0  0  1  1  0  0  0
 
 class Position {
-public:
+ public:
   static constexpr int WIDTH = 7;
   static constexpr int HEIGHT = 6;
   static constexpr int MIN_SCORE = (-(WIDTH * HEIGHT) / 2) + 3;
   static constexpr int MAX_SCORE = ((WIDTH * HEIGHT + 1) / 2) - 3;
 
-  static_assert(WIDTH * (HEIGHT + 1) <= static_cast<int>(sizeof(uint64_t) * CHAR_BIT),
+  static_assert(WIDTH * (HEIGHT + 1) <=
+                    static_cast<int>(sizeof(uint64_t) * CHAR_BIT),
                 "Board does not fit in 64bits bitboard");
 
   Position() : current_position{0}, mask{0}, num_moves{0} {}
@@ -79,7 +80,7 @@ public:
 
   uint64_t GetCurrentPosition() const { return current_position; }
 
-private:
+ private:
   static constexpr uint64_t bottom_mask_full = Bottom(WIDTH, HEIGHT);
   static constexpr uint64_t board_mask =
       bottom_mask_full * ((1LL << HEIGHT) - 1);

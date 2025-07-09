@@ -3,4 +3,7 @@ Checks: 'clang-analyzer-*,
 cppcoreguidelines-*,
 performance-*,
 bugprone-*,
-readability-*'
+google-*,
+readability-*,
+-readability-identifier-length,
+-bugprone-easily-swappable-parameters'

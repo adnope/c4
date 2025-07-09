@@ -14,28 +14,27 @@ void TranspositionTable::Put(const uint64_t key, const uint8_t val) {
   if (entries_count >= static_cast<int>(memoi_table.size() / 2)) {
     Reset();
   }
-  size_t i = index(key);
-  while (memoi_table[i].key != 0 && memoi_table[i].key != key) {
-    i = (i + 1) % memoi_table.size();
+  size_t idx = index(key);
+  while (memoi_table[idx].key != 0 && memoi_table[idx].key != key) {
+    idx = (idx + 1) % memoi_table.size();
     collisions++;
   }
-  if (memoi_table[i].key == 0) {
+  if (memoi_table[idx].key == 0) {
     entries_count++;
   }
-  memoi_table[i].val = val;
-  memoi_table[i].key = key;
+  memoi_table[idx] = {key, val};
 }
 
 uint8_t TranspositionTable::Get(const uint64_t key) const {
-  if (opening_table.find(key) != opening_table.end()) {
+  if (opening_table.contains(key)) {
     return opening_table.at(key);
   }
-  size_t i = index(key);
-  while (memoi_table[i].key != 0) {
-    if (memoi_table[i].key == key) {
-      return memoi_table[i].val;
+  size_t idx = index(key);
+  while (memoi_table[idx].key != 0) {
+    if (memoi_table[idx].key == key) {
+      return memoi_table[idx].val;
     }
-    i = (i + 1) % memoi_table.size();
+    idx = (idx + 1) % memoi_table.size();
   }
   return 0;
 }

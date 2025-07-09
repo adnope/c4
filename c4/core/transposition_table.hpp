@@ -1,12 +1,13 @@
 #pragma once
 
-#include <vector>
 #include <cassert>
 #include <cstdint>
-#include <unordered_map>
+#include <vector>
+
+#include "robin/robin_hood.h"
 
 class TranspositionTable {
-public:
+ public:
   explicit TranspositionTable(const size_t size) : memoi_table(size) {
     assert(size > 0);
     constexpr int OPENING_TABLE_SIZE = 10e6;
@@ -23,34 +24,24 @@ public:
     opening_table.emplace(key, score);
   }
 
-  int GetMemoiEntriesCount() const {
-    return entries_count;
-  }
+  int GetMemoiEntriesCount() const { return entries_count; }
 
-  int GetNumOfCollisions() const {
-    return collisions;
-  }
+  int GetNumOfCollisions() const { return collisions; }
 
-  size_t GetMemoiTableSize() const {
-    return memoi_table.size();
-  }
+  size_t GetMemoiTableSize() const { return memoi_table.size(); }
 
-  size_t GetOpeningTableSize() const {
-    return opening_table.size();
-  }
+  size_t GetOpeningTableSize() const { return opening_table.size(); }
 
-private:
+ private:
   struct Entry {
     uint64_t key;
     uint8_t val;
   };
 
-  std::unordered_map<uint64_t, uint8_t> opening_table;
+  robin_hood::unordered_flat_map<uint64_t, uint8_t> opening_table;
   std::vector<Entry> memoi_table;
 
-  size_t index(const uint64_t key) const {
-    return key % memoi_table.size();
-  }
+  size_t index(const uint64_t key) const { return key % memoi_table.size(); }
 
   int entries_count = 0;
   int collisions = 0;

@@ -5,8 +5,8 @@
 #include "core/solver.hpp"
 
 class Game {
-public:
-  explicit Game(const std::string& ob_book, const std::string& wb_book);
+ public:
+  explicit Game(const std::string &ob_book, const std::string &wb_book);
 
   void StartPlayerVsBotGame();
 
@@ -14,7 +14,7 @@ public:
 
   void StartTraining();
 
-private:
+ private:
   Solver solver;
 
   static void printConnectFourBoard(const std::string &sequence);

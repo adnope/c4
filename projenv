@@ -14,7 +14,6 @@ build() {
     else
         cmake --build build --target $1
     fi
-    
 }
 
 clean() {
@@ -25,17 +24,8 @@ clean() {
     fi
 }
 
-c4ai() {
-    exec_path="build/bin/c4ai"
-    if [ -x $exec_path ]; then
-        $exec_path $1 $2 $3 $4 $5
-    else
-        echo "Error: '$exec_path' not found. Build first!"
-    fi
-}
-
-generator() {
-    exec_path="build/bin/generator"
+c4() {
+    exec_path="build/bin/c4"
     if [ -x $exec_path ]; then
         $exec_path $1 $2 $3 $4 $5
     else

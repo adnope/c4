@@ -6,13 +6,13 @@
 #include "core/solver.hpp"
 
 class MoveFinder {
-public:
+ public:
   MoveFinder(const std::string &ob_path, const std::string &wb_path);
 
   void FindBestMove(const std::string &sequence);
   void Run();
 
-private:
+ private:
   Solver solver;
 
   static void Log(int best_move, int score, int number_of_moves,
